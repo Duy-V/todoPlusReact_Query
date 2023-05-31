@@ -1,5 +1,6 @@
 import React from "react";
 import SearchInput from "./SearchInput";
+import { NavLink } from "react-router-dom";
 
 function NavBar() {
   return (
@@ -19,13 +20,14 @@ function NavBar() {
           ["TodoDetails", "/todos/:slug"],
           //   ['Projects', '/projects'],
           //   ['Reports', '/reports'],
-        ].map(([title, url]) => (
-          <a
-            href={url}
+        ].map(([title, url, index]) => (
+          <NavLink
+            key={index}
+            to={url}
             className="rounded-lg px-3 py-2 text-slate-700 font-medium hover:bg-slate-100 hover:text-slate-900"
           >
             {title}
-          </a>
+          </NavLink>
         ))}
       </nav>
     </div>

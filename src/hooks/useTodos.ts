@@ -17,7 +17,7 @@ const apiClient = new APIClient<Todo>("/todos");
 
 const useTodos = () => {
   const todoQuery = useTodoQueryStore((s) => s.todoQuery);
-
+  //http://localhost:3000/todos?_page=2&_limit=7
   return useInfiniteQuery<FetchResponse<Todo> | any>({
     queryKey: ["todos", todoQuery],
     queryFn: () =>

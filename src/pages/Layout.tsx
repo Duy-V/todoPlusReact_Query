@@ -1,3 +1,4 @@
+import Buttons from "../components/Buttons";
 import Footer from "../components/Footer";
 import NavBar from "../components/NavBar";
 import { Outlet } from "react-router-dom";
@@ -6,6 +7,7 @@ const Layout = () => {
   return (
     <>
       <NavBar />
+      <Buttons />
       <div className="p-2">
         <Outlet />
       </div>

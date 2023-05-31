@@ -1,16 +1,16 @@
 import React from "react";
 
 function Form() {
-  
   return (
-    <div className="modal-box flex gap-5">
+    <div className="modal-box w-11/12 max-w-5xl flex gap-5">
       <div className="right-part flex-auto w-64">
-        {" "}
+        <label>Name</label>
         <input
           type="text"
           placeholder="Name of Todo"
           className="input input-bordered w-full max-w-xs mb-5"
         />
+        <label>Content</label>
         <textarea
           placeholder="Bio"
           className="textarea textarea-bordered textarea-lg w-full max-w-xs"

@@ -3,7 +3,9 @@ import { create } from "zustand";
 interface TodoQuery {
   searchText?: string;
 }
-
+export interface OptionType {
+  title: string;
+}
 interface TodoQueryStore {
   todoQuery: TodoQuery;
   setSearchText: (searchText: string) => void;
@@ -13,7 +15,7 @@ export interface Todo {
   content: string;
   status: boolean;
   deadline: string;
-  tags: string[];
+  tags: OptionType[];
 }
 const useTodoQueryStore = create<TodoQueryStore>((set) => ({
   todoQuery: {},

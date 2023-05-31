@@ -27,6 +27,7 @@ class APIClient<T> {
       .then((res) => res);
   };
 
+  // ?_page=2&_limit=7
   get = (id: number | string) => {
     return axiosInstance.get<T>(this.endpoint + "/" + id).then((res) => res);
   };

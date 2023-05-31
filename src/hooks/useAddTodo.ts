@@ -8,28 +8,27 @@ interface AddTodoContext {
   previousTodos: Todo[];
 }
 
-const useAddTodo = (onAdd: () => void) => {
+const useAddTodo = () => {
   const queryClient = new QueryClient();
   return useMutation<Todo, Error, Todo, AddTodoContext>({
-    mutationFn: todoServices.post,
+    mutationFn: (newTodo: Todo) => todoServices.post(newTodo),
 
-    onMutate: (newTodo: Todo) => {
-      const previousTodos = queryClient.getQueryData<Todo[]>(["todos"]) || [];
+    // onMutate: (newTodo: Todo) => {
+    //   const previousTodos = queryClient.getQueryData<Todo[]>(["todos"]) || [];
 
-      queryClient.setQueryData<Todo[]>(["todos"], (todos = []) => [
-        newTodo,
-        ...todos,
-      ]);
+    //   queryClient.setQueryData<Todo[]>(["todos"], (todos = []) => [
+    //     newTodo,
+    //     ...todos,
+    //   ]);
 
-      onAdd();
-
-      return { previousTodos };
-    },
+    //   return { previousTodos };
+    // },
 
     onSuccess: (savedTodo, newTodo) => {
-      queryClient.setQueryData<Todo[]>(["todos"], (todos) =>
-        todos?.map((todo) => (todo === newTodo ? savedTodo : todo))
-      );
+      queryClient.invalidateQueries(["todos"]);
+      // queryClient.setQueryData<Todo[]>(["todos"], (todos) =>
+      //   todos?.map((todo) => (todo === newTodo ? savedTodo : todo))
+      // );
     },
   });
 };
