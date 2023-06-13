@@ -2,130 +2,155 @@
   "todos": [
     {
       "id": 1,
-      "name": "learning React",
-      "content": "key concepts must finish today: route, component, setup the app",
+      "name": "Basic react",
+      "content": "setup the app",
       "status": true,
-      "deadline": "20/5/2022",
+      "deadline": "2023-06-09T15:23:00.000Z",
+      "idTagsList": [
+        1,
+        2
+      ],
       "tags": [
-        {"title":"key concepts"},
-        {"title":"front end"}
+        {
+          "title": "clean my house"
+        },
+        {
+          "title": "front end"
+        }
       ]
     },
     {
       "id": 2,
-      "name": "learning Vue",
-      " content": "key concepts must finish today: route, component, setup the app",
+      "name": "Vue",
+      "content": " route, component, setup the app",
       "status": false,
-      "deadline": "20/10/2022",
+      "deadline": "2023-06-10T13:58:49.000Z",
+      "idTagsList": [
+        4,
+        5
+      ],
       "tags": [
-        {"title":"front end"},
-        {"title":"front end"}
+        {
+          "title": "chinese"
+        },
+        {
+          "title": "key concept"
+        }
       ]
     },
     {
       "id": 3,
       "name": "learning Grammar in B1",
-      " content": "key concepts must finish in today: present tense, past tense",
+      "content": "present tense, past tense",
       "status": true,
-      "deadline": "20/9/2022",
+      "deadline": "2023-06-16T14:29:38.000Z",
+      "idTagsList": [
+        12,
+        13,
+        18,
+        20
+      ],
       "tags": [
-        {"title":"front end"},
-        {"title":"english"}
+        {
+          "title": "ENGLISH test 1 cam7"
+        }
       ]
     },
     {
       "id": 4,
       "name": "learning Chinese",
-      " content": "key concepts must finish today: 的，了，不管。。。但是",
+      "content": "key concepts must finish today: 的，了，不管。。。但是",
       "status": true,
       "deadline": "20/12/2022",
-      "tags": [
-        {"title":"react"},
-        {"title":"chinese"}
+      "idTagsList": [
+        11,
+        12,
+        22,
+        23
       ]
     },
     {
       "id": 5,
       "name": "learning React part 2",
-      " content": "key concepts must finish today: react query, setup react query",
+      "content": "key concepts must finish today: react query, setup react query",
       "status": true,
       "deadline": "20/11/2022",
-      "tags": [
-        {"title":"key concept"},
-        {"title":"front end"}
+      "idTagsList": [
+        23,
+        24,
+        1,
+        2
       ]
     },
     {
       "id": 6,
       "name": "learning React part 3",
-      " content": "key concepts must finish today: zustand, redux toolkit",
+      "content": "key concepts must finish today: zustand, redux toolkit",
       "status": true,
       "deadline": "20/5/2023",
-      "tags": [
-        {"title":"chinese"},
-        {"title":"front end"},
-        {"title":"english"}
-
+      "idTagsList": [
+        4,
+        5,
+        6
       ]
     },
     {
       "id": 7,
       "name": "learning Words in youtube video",
-      " content": "pick up 100 words",
+      "content": "pick up 100 words",
       "status": true,
       "deadline": "20/5/2022",
-      "tags": [
-        {"title":"react"},
-        {"title":"front end"},
-        {"title":"english"}
+      "idTagsList": [
+        7,
+        20,
+        10
       ]
     },
     {
       "id": 8,
       "name": "learning React",
-      " content": "key concepts must finish today: route, component, setup the app",
+      "content": "key concepts must finish today: route, component, setup the app",
       "status": true,
       "deadline": "20/5/2022",
-      "tags": [
-        {"title":"chinese"},
-        {"title":"front end"},
-        {"title":"vue"}
+      "idTagsList": [
+        4,
+        5,
+        7
       ]
     },
     {
       "id": 9,
       "name": "learning React",
-      " content": "key concepts must finish today: route, component, setup the app",
+      "content": "key concepts must finish today: route, component, setup the app",
       "status": true,
       "deadline": "20/5/2022",
-      "tags": [
-        {"title":"chinese"},
-        {"title":"front end"},
-        {"title":"angular"}
+      "idTagsList": [
+        1,
+        2,
+        5
       ]
     },
     {
       "id": 10,
       "name": "learning React_tailwind",
-      " content": "key concepts must finish today: context, config, setup the tailwind",
+      "content": "key concepts must finish today: context, config, setup the tailwind",
       "status": true,
       "deadline": "20/8/2022",
-      "tags": [
-        {"title":"chinese"},
-        {"title":"front end"},
-        {"title":"UX"}
+      "idTagsList": [
+        16,
+        17
       ]
     },
     {
       "id": 11,
       "name": "learning Chinese",
-      " content": "key concepts must finish today: 不管。。。但是，越来。。。越",
+      "content": "key concepts must finish today: 不管。。。但是，越来。。。越",
       "status": true,
       "deadline": "20/5/2022",
-      "tags": [
-        {"title":"chinese"},
-        {"title":"front end"},
-        {"title":"UX"}
+      "idTagsList": [
+        22,
+        23,
+        24
       ]
     },
     {
@@ -133,10 +158,10 @@
       "content": "key concepts must finish today: usehook",
       "status": true,
       "deadline": "20/4/2023",
-      "tag": [
-        {"title":"chinese"},
-        {"title":"front end"},
-        {"title":"UX"}
+      "idTagsList": [
+        1,
+        2,
+        4
       ],
       "id": 12
     },
@@ -145,116 +170,275 @@
       "content": "key concepts must finish today: usehook",
       "status": true,
       "deadline": "20/4/2023",
-      "tags": [
-        {"title":"chinese"},
-        {"title":"Design"},
-        {"title":"UX"}
+      "idTagsList": [
+        7,
+        10
       ],
       "id": 13
     },
- 
     {
-      "name": "uiy",
-      "content": "ggg",
-      "dealine": "",
-      "tags": [
-        {
-          "title": "Option 2"
-        },
-        {
-          "title": "Option 3"
-        }
+      "name": "SQL_4",
+      "content": "sub queries",
+      "status": false,
+      "idTagsList": [
+        12,
+        13,
+        16
       ],
-      "id": 14
-    },
-    
-    {
-      "name": "aaaa",
-      "content": "aaa",
-      "dealine": "",
-      "tags": [
-        {
-          "title": "Option 3"
-        },
-        {
-          "title": "Option 2"
-        }
-      ],
-      "id": 77
+      "deadline": "2023-06-09T02:21:32.000Z",
+      "id": 84
     },
     {
-      "name": "đww",
-      "content": "eee",
-      "dealine": "",
+      "name": "React Query",
+      "content": "mutation, ",
+      "status": false,
+      "idTagsList": [
+        16,
+        17
+      ],
+      "deadline": "2023-06-09T16:05:54.000Z",
+      "id": 85
+    },
+    {
+      "name": "Ielts",
+      "content": "save new words, writing",
       "tags": [
         {
-          "title": "Option 2"
+          "title": "ENGLISH test 1 cam7"
         },
         {
-          "title": "Option 1"
+          "title": "key concept"
         }
       ],
-      "id": 78
+      "deadline": "2023-06-10T08:53:46.000Z",
+      "id": 86
+    },
+    {
+      "name": "Duy Vo",
+      "content": "sweep my room",
+      "tags": [
+        {
+          "title": "clean my house"
+        }
+      ],
+      "deadline": "2023-06-15T16:10:37.000Z",
+      "id": 87
+    },
+    {
+      "name": "Duy Vo",
+      "content": "sweep my room",
+      "tags": [
+        {
+          "title": "clean my house"
+        }
+      ],
+      "deadline": "2023-06-15T16:10:37.000Z",
+      "id": 88
+    },
+    {
+      "name": "Cleaning room",
+      "content": "擦桌子",
+      "tags": [
+        {
+          "title": "clean my house"
+        }
+      ],
+      "deadline": "2023-06-21T16:14:56.000Z",
+      "id": 89
+    },
+    {
+      "name": "Go to School",
+      "content": "learning Taiwan",
+      "tags": [
+        {
+          "title": "chinese"
+        }
+      ],
+      "deadline": "2023-06-14T02:53:30.000Z",
+      "id": 90
+    },
+    {
+      "name": "Basic React",
+      "content": "setup the app",
+      "tags": [
+        {
+          "title": "clean my house"
+        },
+        {
+          "title": "front end"
+        }
+      ],
+      "deadline": "2023-06-09T15:23:00.000Z",
+      "id": 91
     }
   ],
   "tags": [
     {
-      "id": 1,
-      " content": "vital",
-      "todoIds": [
-        10,
-        11,
-        3,
-        4
-      ]
+      "title": "clean my house",
+      "color": "pink",
+      "id": 1
     },
     {
       "id": 2,
-      " content": "front end",
+      "title": "front end",
+      "color": "orange",
       "todoIds": [
         1,
-        2,
-        3,
-        4,
-        6
-      ]
-    },
-    {
-      "id": 3,
-      " content": "english",
-      "todoIds": [
-        3,
-        4,
-        6
+        5,
+        9,
+        13
       ]
     },
     {
       "id": 4,
-      " content": "chinese",
+      "title": "chinese",
+      "color": "green",
       "todoIds": [
-        5,
-        7,
-        8
+        2,
+        6,
+        8,
+        13
       ]
     },
     {
       "id": 5,
-      " content": "key concept",
+      "title": "key concept",
+      "color": "orange",
       "todoIds": [
         2,
-        5,
-        10
+        6,
+        9
       ]
     },
     {
-      " content": "other",
+      "title": "UX",
+      "color": "pink",
+      "id": 7,
+      "todoIds": [
+        7,
+        8,
+        84
+      ]
+    },
+    {
+      "title": "SQL_2",
+      "color": "blue",
+      "id": 10,
+      "todoIds": [
+        7,
+        13
+      ]
+    },
+    {
+      "title": "Listening Chinese",
+      "color": "pink",
+      "id": 11,
+      "todoIds": [
+        4
+      ]
+    },
+    {
+      "title": "Cleaning my room",
+      "color": "purple",
+      "id": 12,
+      "todoIds": [
+        3,
+        84
+      ]
+    },
+    {
+      "title": "Cooking",
+      "color": "violet",
+      "id": 13,
+      "todoIds": [
+        3,
+        84
+      ]
+    },
+    {
+      "title": "cooking",
+      "color": "crimson",
+      "id": 16,
       "todoIds": [
         10,
-        11,
+        84,
+        85
+      ]
+    },
+    {
+      "title": "Front end",
+      "color": "violet",
+      "id": 17,
+      "todoIds": [
+        10,
+        85
+      ]
+    },
+    {
+      "title": "sport_!",
+      "color": "pink",
+      "id": 18,
+      "todoIds": [
+        3
+      ]
+    },
+    {
+      "title": "sport_!",
+      "color": "pink",
+      "id": 19,
+      "todoIds": []
+    },
+    {
+      "title": "duy rrr",
+      "color": "pink",
+      "id": 20,
+      "todoIds": [
         3,
+        7
+      ]
+    },
+    {
+      "title": "writing task 1",
+      "color": "magenta",
+      "id": 22,
+      "todoIds": [
+        4,
+        11
+      ]
+    },
+    {
+      "title": "importance",
+      "color": "orange",
+      "id": 23,
+      "todoIds": [
+        5,
+        11,
         4
-      ],
-      "id": 6
+      ]
+    },
+    {
+      "title": "Algorithms in JS",
+      "color": "magenta",
+      "id": 24,
+      "todoIds": [
+        5,
+        11
+      ]
+    },
+    {
+      "title": "ENGLISH test 1 cam7",
+      "color": "orange",
+      "id": 25
+    },
+    {
+      "title": "Buy Book",
+      "color": "coral",
+      "id": 26
+    },
+    {
+      "title": "Writing",
+      "color": "coral",
+      "id": 27
     }
   ]
 }

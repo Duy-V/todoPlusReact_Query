@@ -1,79 +1,46 @@
 import React, { useState } from "react";
 interface PaginationProps {
-  data: any[]; // your data type here
-  RenderComponent: (item: any) => JSX.Element; // your component type here
-  pageLimit: number;
-  dataLimit: number;
-  onPageChange: (page: number) => void;
+  lastPage: number;
+  currentPage: number;
+  setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const Pagination: React.FC<PaginationProps> = ({
-  data,
-  RenderComponent,
-  pageLimit,
-  dataLimit,
-  onPageChange,
+  currentPage,
+  lastPage,
+  setCurrentPage,
+  // onPageChange,
 }) => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const pages = Math.ceil(data?.length / dataLimit);
-  console.log(currentPage);
   function goToNextPage() {
     console.log(currentPage);
-    if (currentPage >= Math.floor(data.length / dataLimit) + 1) return;
-    setCurrentPage((page) => page + 1);
-    onPageChange(currentPage + 1);
+    setCurrentPage((page: number) => page + 1);
   }
 
   function goToPreviousPage() {
     if (currentPage === 1) return;
-    setCurrentPage((page) => page - 1);
-    onPageChange(currentPage - 1);
+    setCurrentPage((page: number) => page - 1);
   }
 
-  const getPaginationGroup = () => {
-    const start = Math.floor((currentPage - 1) / pageLimit) * pageLimit;
-    return new Array(pageLimit)
-      .fill(0)
-      .map((_, idx) => start + idx + 1)
-      .filter((item: any) => item < Math.floor(data?.length / dataLimit) + 1);
-  };
-  function changePage(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
-    const pageNumber = Number(event.target.textContent);
-    setCurrentPage(pageNumber);
-    onPageChange(pageNumber);
-    // return pageNumber;
-  }
-  console.log(getPaginationGroup());
+  console.log(currentPage);
   return (
-    <div className="btn-group grid grid-cols-2">
+    <div className="flex gap-2">
       <button
         onClick={goToPreviousPage}
-        className={`btn btn-outline first-letter:paginationItem ${
-          currentPage === 1 ? "disabled" : ""
-        }`}
+        className="btn btn-outline first-letter:paginationItem "
+        disabled={currentPage === 1}
       >
         Previous page
       </button>
 
-      {/* Show page numbers */}
-      {getPaginationGroup().map((item: any, index: number) => (
-        <button
-          key={index}
-          onClick={changePage}
-          className={`btn paginationItem ${
-            currentPage === item ? "active" : null
-          }`}
-        >
-          <span>{item}</span>
-        </button>
-      ))}
+      <button className="btn paginationItem">
+        <span>{currentPage}</span>
+      </button>
 
       {/* Next Button */}
       <button
         onClick={goToNextPage}
-        className={`btn btn-outline paginationItem ${
-          currentPage === pages ? "disabled" : ""
-        }`}
+        className="btn btn-outline paginationItem "
+        disabled={currentPage === lastPage}
       >
         Next
       </button>

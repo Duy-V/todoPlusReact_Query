@@ -1,23 +1,27 @@
 import { z } from "zod";
 
 export const BasicTodoSchema = z.object({
-  name: z
-    .string()
-    .trim()
-    .min(2, { message: "Name must be 2 or more characters long" }),
-  content: z
-    .string()
-    .trim()
-    .toLowerCase()
-    .min(4, { message: "Username must be 4 or more characters long" }),
-  status: z.boolean(),
-  deadline: z.date({
-    required_error: "Please select a date and time",
-    invalid_type_error: "That's not a date!",
-  }),
-  tags: z.array(z.object({ title: z.string() })),
+  name: z.string().nonempty({ message: "Name is required" }),
+  content: z.string().nonempty({ message: "Content is required" }),
+  tags: z
+    .array(z.object({ title: z.string() }))
+    .nonempty({ message: "Tag is required" }),
+  // idTagsList: z.array(z.number()),
+  deadline: z.string().datetime().nonempty({ message: "Deadline is required" }),
 });
 
 const HasID = z.object({ id: z.number().int().positive() });
 export const TodoSchema = BasicTodoSchema.merge(HasID);
 export type Todo = z.infer<typeof TodoSchema>;
+export type TodoWithoutId = z.infer<typeof BasicTodoSchema>;
+
+export const BasicTagSchema = z.object({
+  title: z.string().nonempty({ message: "Name is required" }),
+  color: z.string().nonempty({ message: "Color is required" }),
+});
+export const todoIdsSchema = z
+  .array(z.number())
+  .nonempty({ message: "Tag is required" });
+export type TagWithoutId = z.infer<typeof BasicTagSchema>;
+export const TagSchema = BasicTagSchema.merge(HasID);
+export type TagWithId = z.infer<typeof TagSchema>;

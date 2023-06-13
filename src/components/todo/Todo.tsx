@@ -1,6 +1,14 @@
-import React from "react";
+import { useNavigate } from "react-router-dom";
+import useTags from "../../hooks/tagHook/useTags";
+import MessageDisplay from "../MessageDisplay";
 
 function Todo({ data }: any) {
+  const { data: tags } = useTags();
+  const navigate = useNavigate(); // Initialize useNavigate
+
+  const handleEditClick = () => {
+    navigate(`/todos/${data.id}`, { state: { existingTodo: data } });
+  };
   return (
     <div className="flex flex-row flex-wrap gap-5">
       <div className="flex-row card w-96 bg-base-100 shadow-xl p-2">
@@ -17,11 +25,18 @@ function Todo({ data }: any) {
               <div className="badge badge-secondary"></div>
             </h2>
             <p>{data?.content}</p>
-            {data?.tags?.map((tag: any, index: number) => (
-              <div key={index} className="card-actions justify-end">
-                <div className="badge badge-outline">{tag?.title}</div>
-              </div>
-            ))}
+            {tags?.data
+              ?.filter((tag: any) => data?.idTagsList?.includes(tag.id))
+              ?.map((tag: any, index: number) => (
+                <div key={index} className="card-actions justify-end">
+                  <div
+                    className="badge badge-outline"
+                    style={{ background: tag.color }}
+                  >
+                    {tag?.title}
+                  </div>
+                </div>
+              ))}
           </div>
         </div>
 
@@ -30,7 +45,10 @@ function Todo({ data }: any) {
             <button className="btn btn-outline btn-primary btn-sm mb-3">
               View
             </button>
-            <button className="btn btn-outline btn-secondary btn-sm mb-3">
+            <button
+              className="btn btn-outline btn-secondary btn-sm mb-3"
+              onClick={handleEditClick}
+            >
               Edit
             </button>
             <button className="btn btn-outline btn-accent btn-sm mb-3">

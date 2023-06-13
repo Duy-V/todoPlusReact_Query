@@ -1,4 +1,4 @@
-import { Todo } from "../store";
-import APIClient from "./api-clients";
+import { TodoWithoutId } from "./../models/todoList";
+import APIClientTodo from "./api-clients";
 
-export default new APIClient<Todo>("/todos");
+export default new APIClientTodo<TodoWithoutId>("/todos");

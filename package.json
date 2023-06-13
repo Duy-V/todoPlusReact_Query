@@ -24,10 +24,12 @@
     "dayjs": "^1.11.7",
     "formik": "^2.4.0",
     "react": "^18.2.0",
-    "react-datetime-picker": "^5.2.0",
+    "react-datepicker": "^4.12.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.44.2",
+    "react-infinite-scroll-component": "^6.1.0",
     "react-router-dom": "^6.10.0",
+    "react-select": "^5.7.3",
     "styled-components": "^5.3.11",
     "zod": "^3.21.4",
     "zustand": "^4.3.7"
