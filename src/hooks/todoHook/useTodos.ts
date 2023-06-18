@@ -15,38 +15,15 @@ export interface Todo {
 // i think tags: todoId[], but i can not defines todoId
 const apiClient = new APIClient<Todo>("/todos");
 
-const useTodos = (currentPage: number) => {
-  // const useTodos = () => {
+const useTodos = (page: number, LIMIT: number) => {
   return useQuery<FetchResponse<Todo> | any>({
-    // queryKey: ["todos"],
-    queryKey: ["todos", currentPage],
-    queryFn: () => apiClient.getAll(currentPage),
+    queryKey: ["todos", "list", page],
+    queryFn: () => apiClient.getAll(page, LIMIT),
 
-    staleTime: ms("24h"),
+    staleTime: ms("5s"),
     keepPreviousData: true,
+    retry: 0,
   });
-
-  // queryFn: ({ pageParam = 1 }) =>
-  //   apiClient.getAll({
-  //     params: {
-  //       // genres: gameQuery.genreId,
-  //       // parent_platforms: gameQuery.platformId,
-  //       // ordering: gameQuery.sortOrder,
-  //       // search: gameQuery.searchText,
-  //       page: pageParam,
-  //     },
-  //   }),
-
-  // getNextPageParam: (lastPage, allPages) => {
-  //   console.log(lastPage, allPages);
-  //   return lastPage.next ? allPages.length + 1 : undefined;
-  // },
 };
 
 export default useTodos;
-
-// queryFn:  () => apiClient.getAll(currentPage),
-
-//   staleTime: ms("24h"),
-//   keepPreviousData: true,
-// }),

@@ -4,7 +4,7 @@ import { TagWithoutId } from "../../models/todoList";
 import todoServices from "../../services/todoServices";
 import tagServices from "../../services/tagServices";
 import { useContext } from "react";
-import { MessageContext } from "../../context/MessageContext";
+import { useNavigate } from "react-router-dom";
 
 const apiClient = new APIClient<any>("/tags");
 interface AddTagContext {
@@ -13,19 +13,15 @@ interface AddTagContext {
 
 const useAddTag = () => {
   const queryClient = new QueryClient();
-  const { setMessage, setModalOpen } = useContext(MessageContext);
+  const navigate = useNavigate();
 
   return useMutation<TagWithoutId, Error, TagWithoutId, AddTagContext>({
     mutationFn: (newTag: TagWithoutId) => tagServices.post(newTag),
     onSuccess: () => {
-      queryClient.invalidateQueries(["tags"]);
-      setMessage("Tag added successfully!");
-      setModalOpen(true); // open the modal
+      queryClient.invalidateQueries(["tags", "list"]);
+      navigate(`/tags/list`);
     },
-    onError: () => {
-      setMessage("Failed to added tag.");
-      setModalOpen(true); // open the modal
-    },
+    onError: () => {},
   });
 };
 

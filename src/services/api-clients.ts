@@ -20,11 +20,11 @@ class APIClient<T> {
     this.endpoint = endpoint;
   }
 
-  getAll = (currentPage: number) => {
+  getAll = (page: number, LIMIT: number) => {
     // getAll = () => {
     return (
       axiosInstance
-        .get<FetchResponse<T>>(this.endpoint + `?_limit=4&_page=${currentPage}`)
+        .get<FetchResponse<T>>(this.endpoint + `?_limit=${LIMIT}&_page=${page}`)
         // .get<FetchResponse<T>>(this.endpoint)
         .then((res) => res)
     );
@@ -34,9 +34,14 @@ class APIClient<T> {
     console.log(id);
     return axiosInstance
       .get<T>(this.endpoint + "/" + id)
-      .then((res) => res.data);
+      .then((res) => res.data)
+      .catch((error) => {
+        console.error(error);
+        throw error;
+      });
   };
   delete = (id: number | string) => {
+    console.log(id);
     return axiosInstance.delete<T>(this.endpoint + "/" + id).then((res) => res);
   };
   post = (data: T) => {

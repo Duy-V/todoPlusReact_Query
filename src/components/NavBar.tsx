@@ -18,6 +18,7 @@ function NavBar() {
         {[
           ["Home", "/"],
           ["TagsList", "/tags/list"],
+          ["TodosList", "/todos?page=1"],
           //   ['Projects', '/projects'],
           //   ['Reports', '/reports'],
         ].map(([title, url, index]) => (

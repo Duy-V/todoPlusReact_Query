@@ -7,10 +7,9 @@ import TextField from "@mui/material/TextField";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import useAddTodo from "./../../hooks/todoHook/useAddTodo";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import useTags from "./../../hooks/tagHook/useTags";
 import useUpdateTodo from "../../hooks/todoHook/useUpdateTodo";
-import MessageDisplay from "../MessageDisplay";
 
 type OptionType = { title: string };
 interface TodoFormProps {
@@ -27,13 +26,14 @@ const TodoForm: React.FC<TodoFormProps> = ({ isEditing, existingTodo }) => {
   } = useForm<TodoWithoutId>({
     resolver: zodResolver(BasicTodoSchema),
   });
+
   const addTodo = useAddTodo();
   const updateTodo = useUpdateTodo();
-  const [startDate, setStartDate] = useState(new Date());
-  //call list tag to apply into multiple choice input
+  const [startDate, setStartDate] = useState<Date | null>(null);
   const { data } = useTags();
   const options: OptionType[] = data?.data ?? [];
   const tagsValue = useWatch({ control, name: "tags" });
+
   const onSubmit: SubmitHandler<TodoWithoutId> = (data) => {
     if (existingTodo) {
       updateTodo.mutate({ ...existingTodo, ...data });
@@ -41,24 +41,27 @@ const TodoForm: React.FC<TodoFormProps> = ({ isEditing, existingTodo }) => {
       addTodo.mutate(data);
     }
   };
+
   useEffect(() => {
     if (existingTodo) {
       setValue("name", existingTodo.name);
       setValue("content", existingTodo.content);
 
-      const existingTags = existingTodo.idTagsList
-        .map((id: number) => {
-          return data.data.find((tag: any) => tag.id === id);
+      const existingTags = existingTodo?.tags
+        ?.map((tagTodo: any) => {
+          return data.data.find((tag: any) => tag.title === tagTodo.title);
         })
-        .filter(Boolean); // remove any undefined values
+        .filter(Boolean);
       setValue("tags", existingTags);
 
+      const deadlineDate = new Date(existingTodo.deadline);
+
       setValue("deadline", existingTodo.deadline);
+      setStartDate(deadlineDate);
     }
   }, [existingTodo, setValue, data?.data]);
   return (
     <div className="w-1/2 mx-auto mt-20">
-      <MessageDisplay redirectPath="/" />
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
@@ -114,7 +117,19 @@ const TodoForm: React.FC<TodoFormProps> = ({ isEditing, existingTodo }) => {
                   options={options}
                   getOptionLabel={(option: OptionType) => option?.title}
                   onChange={(_, data: OptionType[]) => {
-                    field.onChange(data);
+                    // If the last selected item is already in the array, remove it; otherwise, add it
+                    const lastSelectedItem = data[data.length - 1];
+                    const isAlreadySelected = field.value.some(
+                      (item: OptionType) =>
+                        item.title === lastSelectedItem.title
+                    );
+                    const newValue = isAlreadySelected
+                      ? field.value.filter(
+                          (item: OptionType) =>
+                            item.title !== lastSelectedItem.title
+                        )
+                      : data;
+                    field.onChange(newValue);
                   }}
                   // Use the watched value for the value of the Autocomplete component
                   value={tagsValue || []}
@@ -147,11 +162,16 @@ const TodoForm: React.FC<TodoFormProps> = ({ isEditing, existingTodo }) => {
                 <DatePicker
                   selected={startDate}
                   onChange={(date: Date) => {
-                    setStartDate(date);
-                    field.onChange(date.toISOString());
+                    if (date) {
+                      setStartDate(date);
+                      field.onChange(date.toISOString());
+                    } else {
+                      setStartDate(null);
+                      field.onChange("");
+                    }
                   }}
                   timeInputLabel="Time:"
-                  dateFormat="MM/dd/yyyy h:mm aa"
+                  dateFormat="MMMM d, yyyy h:mm aa"
                   showTimeInput
                 />
               )}

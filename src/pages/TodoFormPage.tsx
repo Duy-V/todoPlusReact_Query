@@ -1,4 +1,3 @@
-import MessageDisplay from "../components/MessageDisplay";
 import TodoForm from "./../components/todo/TodoForm";
 
 function TodoDetailsPage() {

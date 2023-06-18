@@ -8,9 +8,9 @@ const apiClient = new APIClient<TagWithoutId>("/tags");
 
 const useTags = () => {
   return useQuery<FetchResponse<TagWithoutId> | any>({
-    queryKey: ["tags"],
+    queryKey: ["tags", "list"],
     queryFn: () => apiClient.getAll(),
-    staleTime: ms("24h"),
+    staleTime: ms("5s"),
     keepPreviousData: true,
   });
 };

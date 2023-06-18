@@ -1,11 +1,11 @@
 import { Autocomplete, TextField } from "@mui/material";
 import React, { useEffect } from "react";
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { Controller, SubmitHandler, useForm, useWatch } from "react-hook-form";
 import { BasicTagSchema, TagWithId } from "../../models/todoList";
 import { zodResolver } from "@hookform/resolvers/zod";
 import useAddTag from "../../hooks/tagHook/useAddTag";
 import useUpdateTag from "../../hooks/tagHook/useUpdateTag";
-import MessageDisplay from "../MessageDisplay";
+import useTags from "../../hooks/tagHook/useTags";
 
 interface TagFormProps {
   isEditing: boolean;
@@ -22,6 +22,8 @@ const TagForm: React.FC<TagFormProps> = ({ isEditing, existingTag }) => {
   } = useForm<TagWithId>({
     resolver: zodResolver(BasicTagSchema),
   });
+  const tagsColor = useWatch({ control, name: "color" });
+
   const addTag = useAddTag();
   const updateTag = useUpdateTag();
   const options: string[] = [
@@ -42,25 +44,23 @@ const TagForm: React.FC<TagFormProps> = ({ isEditing, existingTag }) => {
     "purple",
     "red",
   ];
-
+  const exitingList = useTags();
   const onSubmit: SubmitHandler<any> = (data) => {
-    console.log(data);
-    if (existingTag) {
-      updateTag.mutate({ ...existingTag, ...data });
-    } else {
-      addTag.mutate(data);
-    }
+    exitingList.data.data?.find((item: any) => item.title === data.title)
+      ? alert("the name is existing")
+      : existingTag
+      ? updateTag.mutate({ ...existingTag, ...data })
+      : addTag.mutate(data);
   };
   useEffect(() => {
+    console.log(existingTag);
     if (existingTag) {
       setValue("title", existingTag.title);
-      // setValue("color", existingTag.color);
+      setValue("color", existingTag.color);
     }
   }, [existingTag]);
   return (
     <div className="w-1/2 mx-auto mt-20">
-    <MessageDisplay redirectPath="/tags/list" />
-
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
@@ -89,12 +89,14 @@ const TagForm: React.FC<TagFormProps> = ({ isEditing, existingTag }) => {
             <Controller
               name="color"
               control={control}
+              defaultValue={existingTag?.color}
               render={({ field }) => (
                 <Autocomplete
                   options={options}
                   {...register("color")}
+                  getOptionLabel={(option) => option}
+                  value={tagsColor || ""}
                   onChange={(_, data) => field.onChange(data)}
-                  value={field.value}
                   renderInput={(params) => (
                     <TextField
                       {...params}
