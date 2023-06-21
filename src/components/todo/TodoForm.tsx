@@ -26,11 +26,12 @@ const TodoForm: React.FC<TodoFormProps> = ({ isEditing, existingTodo }) => {
   } = useForm<TodoWithoutId>({
     resolver: zodResolver(BasicTodoSchema),
   });
-
+  const [open, setOpen] = useState(false);
   const addTodo = useAddTodo();
   const updateTodo = useUpdateTodo();
   const [startDate, setStartDate] = useState<Date | null>(null);
   const { data } = useTags();
+
   const options: OptionType[] = data?.data ?? [];
   const tagsValue = useWatch({ control, name: "tags" });
 
@@ -115,11 +116,12 @@ const TodoForm: React.FC<TodoFormProps> = ({ isEditing, existingTodo }) => {
                 <Autocomplete
                   multiple
                   options={options}
+                  disableCloseOnSelect={true}
                   getOptionLabel={(option: OptionType) => option?.title}
                   onChange={(_, data: OptionType[]) => {
                     // If the last selected item is already in the array, remove it; otherwise, add it
                     const lastSelectedItem = data[data.length - 1];
-                    const isAlreadySelected = field.value.some(
+                    const isAlreadySelected = field?.value?.some(
                       (item: OptionType) =>
                         item.title === lastSelectedItem.title
                     );
@@ -131,7 +133,6 @@ const TodoForm: React.FC<TodoFormProps> = ({ isEditing, existingTodo }) => {
                       : data;
                     field.onChange(newValue);
                   }}
-                  // Use the watched value for the value of the Autocomplete component
                   value={tagsValue || []}
                   renderInput={(params) => (
                     <TextField

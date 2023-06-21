@@ -2,13 +2,12 @@ import { QueryClient, useMutation, useQuery } from "@tanstack/react-query";
 import APIClient, { newTodo } from "../../services/api-clients";
 import { TodoWithoutId } from "../../models/todoList";
 import todoServices from "../../services/todoServices";
-import { Todo } from "../../store";
 import { createContext, useContext, useState, ReactNode } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-const apiClient = new APIClient<Todo>("/todos");
+const apiClient = new APIClient<TodoWithoutId>("/todos");
 interface AddTodoContext {
-  previousTodos: Todo[];
+  previousTodos: TodoWithoutId[];
 }
 
 // Create a provider component

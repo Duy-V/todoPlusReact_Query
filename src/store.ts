@@ -1,28 +1,23 @@
 import { create } from "zustand";
 
 interface TodoQuery {
+  sortOrder?: string;
   searchText?: string;
 }
-export interface OptionType {
-  title: string;
-}
+
 interface TodoQueryStore {
   todoQuery: TodoQuery;
   setSearchText: (searchText: string) => void;
+  setSortOrder: (sortOrder: string) => void;
 }
-export interface Todo {
-  name: string;
-  content: string;
-  status: boolean;
-  deadline: string;
-  tags: OptionType[];
-}
+
 const useTodoQueryStore = create<TodoQueryStore>((set) => ({
   todoQuery: {},
-  //   addAnTodo: (todo:Todo) => set((prevState: Todo[]) => (
-  //     { todos: [...prevState.todos, todo] }
-  //   )),
   setSearchText: (searchText) => set(() => ({ todoQuery: { searchText } })),
+  setSortOrder: (sortOrder) =>
+    set((store) => ({
+      todoQuery: { ...store.todoQuery, sortOrder },
+    })),
 }));
 
 export default useTodoQueryStore;

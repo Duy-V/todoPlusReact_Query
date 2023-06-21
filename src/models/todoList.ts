@@ -8,6 +8,7 @@ export const BasicTodoSchema = z.object({
     .nonempty({ message: "Tag is required" }),
   // idTagsList: z.array(z.number()),
   deadline: z.string().datetime().nonempty({ message: "Deadline is required" }),
+  status: z.boolean().optional(),
 });
 
 const HasID = z.object({ id: z.number().int().positive() });

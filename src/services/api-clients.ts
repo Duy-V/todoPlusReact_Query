@@ -20,14 +20,27 @@ class APIClient<T> {
     this.endpoint = endpoint;
   }
 
-  getAll = (page: number, LIMIT: number) => {
-    // getAll = () => {
-    return (
-      axiosInstance
-        .get<FetchResponse<T>>(this.endpoint + `?_limit=${LIMIT}&_page=${page}`)
-        // .get<FetchResponse<T>>(this.endpoint)
-        .then((res) => res)
-    );
+  getAll = ({ params, source }: { params: any; source: string }) => {
+    let queryString = "";
+
+    if (params.page && params.limit) {
+      queryString += `?_limit=${params.limit}&_page=${params.page}&_sort=id&_order=desc`;
+    }
+
+    if (params.searchText) {
+      if (source === "tagsList") {
+        queryString += `?_q=${params.searchText}`;
+      } else {
+        queryString += `&_q=${params.searchText}`;
+      }
+    }
+    if (params.sortOrder) {
+      queryString += `&_sort=${params.sortOrder}`;
+    }
+
+    return axiosInstance
+      .get<FetchResponse<T>>(this.endpoint + queryString)
+      .then((res) => res);
   };
 
   get = (id: number | string) => {
