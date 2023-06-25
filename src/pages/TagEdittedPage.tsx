@@ -8,7 +8,6 @@ function TagEdittedPage() {
   const [existingTag, setExistingTag] = useState(null);
   const { id } = useParams(); // Get the id parameter from the URL
   const { data: tag } = useTag(id || "");
-  console.log(tag);
   useEffect(() => {
     if (tag) {
       setIsEditing(true);
@@ -18,7 +17,6 @@ function TagEdittedPage() {
       setExistingTag(null);
     }
   }, [tag]);
-  console.log(existingTag);
   return (
     <div>
       <h1>Edit Tag</h1>

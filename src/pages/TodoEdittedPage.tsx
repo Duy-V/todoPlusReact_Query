@@ -7,9 +7,7 @@ function TodoEdittedPage() {
   const [isEditing, setIsEditing] = useState(false);
   const [existingTodo, setExistingTodo] = useState(null);
   const { id } = useParams(); // Get the id parameter from the URL
-  console.log(id);
   const { data: todo } = useTodo(id || "");
-  console.log(todo);
   useEffect(() => {
     if (todo) {
       setIsEditing(true);
@@ -19,7 +17,6 @@ function TodoEdittedPage() {
       setExistingTodo(null);
     }
   }, [todo]);
-  console.log(existingTodo);
   return (
     <div>
       <h1>Edit Todo</h1>

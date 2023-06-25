@@ -20,41 +20,21 @@ class APIClient<T> {
     this.endpoint = endpoint;
   }
 
-  getAll = ({ params, source }: { params: any; source: string }) => {
-    let queryString = "";
-
-    if (params.page && params.limit) {
-      queryString += `?_limit=${params.limit}&_page=${params.page}&_sort=id&_order=desc`;
-    }
-
-    if (params.searchText) {
-      if (source === "tagsList") {
-        queryString += `?_q=${params.searchText}`;
-      } else {
-        queryString += `&_q=${params.searchText}`;
-      }
-    }
-    if (params.sortOrder) {
-      queryString += `&_sort=${params.sortOrder}`;
-    }
-
+  getAll = (queryString: string) => {
     return axiosInstance
       .get<FetchResponse<T>>(this.endpoint + queryString)
       .then((res) => res);
   };
 
   get = (id: number | string) => {
-    console.log(id);
     return axiosInstance
       .get<T>(this.endpoint + "/" + id)
       .then((res) => res.data)
       .catch((error) => {
-        console.error(error);
         throw error;
       });
   };
   delete = (id: number | string) => {
-    console.log(id);
     return axiosInstance.delete<T>(this.endpoint + "/" + id).then((res) => res);
   };
   post = (data: T) => {

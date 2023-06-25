@@ -15,9 +15,7 @@ function Todo({ data, page }: any) {
   const updateStatusTodo = useUpdateTodo();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [itemToDelete, setItemToDelete] = useState(null);
-  console.log(location?.search);
   const handleEditClick = () => {
-    console.log("edit");
     navigate(`/todos/${data.id}`, { state: { pageNumber: page } });
   };
   const selectedTags = tags?.data?.filter((dataTag: any) =>

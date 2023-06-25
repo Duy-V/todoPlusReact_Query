@@ -46,14 +46,20 @@ const TagForm: React.FC<TagFormProps> = ({ isEditing, existingTag }) => {
   ];
   const exitingList = useTags();
   const onSubmit: SubmitHandler<any> = (data) => {
-    exitingList.data.data?.find((item: any) => item.title === data.title)
-      ? alert("the name is existing")
-      : existingTag
-      ? updateTag.mutate({ ...existingTag, ...data })
-      : addTag.mutate(data);
+    const existingTagInList = exitingList.data.data?.find(
+      (item: any) => item.title === data.title
+    );
+
+    if (existingTagInList && !isEditing) {
+      alert("The name is existing");
+    } else if (isEditing) {
+      updateTag.mutate({ ...existingTag, ...data });
+    } else {
+      addTag.mutate(data);
+    }
   };
+
   useEffect(() => {
-    console.log(existingTag);
     if (existingTag) {
       setValue("title", existingTag.title);
       setValue("color", existingTag.color);
