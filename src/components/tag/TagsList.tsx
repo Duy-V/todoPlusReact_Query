@@ -5,7 +5,6 @@ import { TagWithoutId } from "../../models/todoList";
 
 function TagsList() {
   const { data } = useTags();
-  console.log(data?.data);
   return (
     <div className="flex flex-row flex-wrap gap-5">
       {data?.data?.map((item: TagWithoutId, index: number) => (

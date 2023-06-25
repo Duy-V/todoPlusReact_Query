@@ -1,28 +1,28 @@
 import { Todo } from "../../models/todoList";
 import { QueryClient, useMutation, useQuery } from "@tanstack/react-query";
-import todoServices from "../../services/todoServices";
-import { useContext } from "react";
 import { useQueryString } from "../../utils/utils";
 import { toast } from "react-toastify";
+import tagServices from "../../services/tagServices";
 
 interface AddTodoContext {
   previousTodos: Todo[];
 }
 
-const useDeleteTodo = () => {
+const useDeleteTag = () => {
   const queryClient = new QueryClient();
   const queryString: { page?: string } = useQueryString();
   const page = Number(queryString.page) || 1;
   return useMutation<number, Error, number, AddTodoContext>({
-    mutationFn: (id: number) => todoServices.delete(id),
+    mutationFn: (id: number) => tagServices.delete(id),
     onSuccess: () => {
-      toast.success(`Xóa thành công todo với id là ${id}`);
+      toast.success(`Xóa thành công tag với id là ${id}`);
       queryClient.invalidateQueries({
-        queryKey: ["todos", "list", page],
+        queryKey: ["tags", "list", page],
+        // exact: true,
       });
     },
     onError: () => {},
   });
 };
 
-export default useDeleteTodo;
+export default useDeleteTag;

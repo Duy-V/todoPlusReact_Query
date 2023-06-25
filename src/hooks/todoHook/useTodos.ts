@@ -2,6 +2,7 @@ import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import ms from "ms";
 import APIClient, { FetchResponse } from "../../services/api-clients";
 import useTodoQueryStore from "../../store";
+import { constructQueryString } from "../../utils/query";
 
 export interface Todo {
   id: number;
@@ -17,6 +18,15 @@ const apiClient = new APIClient<Todo>("/todos");
 
 const useTodos = (page: number, LIMIT: number) => {
   const todoQuery = useTodoQueryStore((s) => s.todoQuery);
+  const params = {
+    searchText: todoQuery.searchText,
+    // sortOrder: "desc",
+    sortOrder: todoQuery.sortOrder,
+    page: page,
+    limit: LIMIT,
+  };
+
+  const queryString = constructQueryString(params, "todoList");
 
   return useQuery<FetchResponse<Todo> | any>({
     queryKey: [
@@ -26,16 +36,7 @@ const useTodos = (page: number, LIMIT: number) => {
       todoQuery.searchText,
       todoQuery.sortOrder,
     ],
-    queryFn: () =>
-      apiClient.getAll({
-        params: {
-          searchText: todoQuery.searchText,
-          sortOrder: todoQuery.sortOrder,
-          page: page,
-          limit: LIMIT,
-        },
-        source: "todoList",
-      }),
+    queryFn: () => apiClient.getAll(queryString),
     staleTime: ms("5s"),
     keepPreviousData: true,
     retry: 0,
