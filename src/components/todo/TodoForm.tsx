@@ -17,7 +17,7 @@ import useTags from "./../../hooks/tagHook/useTags";
 import useUpdateTodo from "../../hooks/todoHook/useUpdateTodo";
 import { useControlledInput } from "../../hookForm/useControlledInput";
 import { useControlledAutocomplete } from "../../hookForm/useControlledAutocomplete";
-import { useControlledDatePicker } from "../../hookForm/useControlledDatePicker";
+// import { useControlledDatePicker } from "../../hookForm/useControlledDatePicker";
 
 type OptionType = { title: string };
 interface TodoFormProps {
@@ -43,28 +43,28 @@ const TodoForm: React.FC<TodoFormProps> = ({ isEditing, existingTodo }) => {
   const options: OptionType[] = data?.data ?? [];
   const tagsValue = useWatch({ control, name: "tags" });
 
-  // const useControlledDatePicker = (control, name, defaultValue = "") => {
-  //   const {
-  //     field,
-  //     fieldState: { error },
-  //   } = useController({
-  //     name,
-  //     control,
-  //     defaultValue,
-  //   });
+  const useControlledDatePicker = (control, name, defaultValue = "") => {
+    const {
+      field,
+      fieldState: { error },
+    } = useController({
+      name,
+      control,
+      defaultValue,
+    });
 
-  //   const handleDatePickerChange = (date) => {
-  //     if (date) {
-  //       setStartDate(date);
-  //       field.onChange(date.toISOString());
-  //     } else {
-  //       setStartDate(null);
-  //       field.onChange("");
-  //     }
-  //   };
+    const handleDatePickerChange = (date) => {
+      if (date) {
+        setStartDate(date);
+        field.onChange(date.toISOString());
+      } else {
+        setStartDate(null);
+        field.onChange("");
+      }
+    };
 
-  //   return { field, error, startDate, handleDatePickerChange };
-  // };
+    return { field, error, startDate, handleDatePickerChange };
+  };
 
   const { field: nameField, error: nameError } = useControlledInput(
     control,
@@ -79,12 +79,6 @@ const TodoForm: React.FC<TodoFormProps> = ({ isEditing, existingTodo }) => {
     error: tagsError,
     handleAutocompleteChange,
   } = useControlledAutocomplete(control, "tags");
-  // const {
-  //   field: deadlineField,
-  //   error: deadlineError,
-  //   // startDate,
-  //   handleDatePickerChange,
-  // } = useControlledDatePicker(control, "deadline");
   const {
     field: deadlineField,
     error: deadlineError,
