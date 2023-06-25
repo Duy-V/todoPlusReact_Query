@@ -58,14 +58,20 @@
       "status": true
     },
     {
-      "name": "Destination B2",
-      "content": "Almost of tense and modal verb",
+      "name": "Destination b1",
+      "content": "Almost of tense and modal verb, and how to using them.",
       "tags": [
         {
           "title": "Buy Book"
+        },
+        {
+          "title": "SQL"
+        },
+        {
+          "title": "React"
         }
       ],
-      "deadline": "2023-06-27T08:02:00.000Z",
+      "deadline": "2023-05-25T12:05:00.000Z",
       "id": 99,
       "status": true
     }
