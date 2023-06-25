@@ -82,7 +82,6 @@ const TodoForm: React.FC<TodoFormProps> = ({ isEditing, existingTodo }) => {
   const {
     field: deadlineField,
     error: deadlineError,
-    // startDate,
     handleDatePickerChange,
   } = useControlledDatePicker(control, "deadline");
 

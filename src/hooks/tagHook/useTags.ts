@@ -17,9 +17,28 @@ const useTags = () => {
   };
   const queryString = constructQueryString(params, "tagsList");
 
-  return useQuery<FetchResponse<Tag> | any>({
+  return useInfiniteQuery<FetchResponse<Tag> | any>({
     queryKey: ["tags", "list", todoQuery.searchText],
-    queryFn: () => apiClient.getAll(queryString),
+    // queryFn: ({ pageParam = 1 }) => apiClient.getAll(queryString),
+    queryFn: ({ pageParam = 1 }) =>
+      apiClient.getAllTags({
+        params: {
+          page: pageParam,
+        },
+      }),
+
+    getNextPageParam: (lastPage, allPages) => {
+      console.log(lastPage);
+      const linkHeader = lastPage.headers.link;
+      const nextPageLink = linkHeader.match(
+        /<([^>]*_page=([^>]*))>; rel="next"/
+      );
+      const nextPageNumber = nextPageLink
+        ? parseInt(nextPageLink[2])
+        : undefined;
+      return nextPageNumber ? allPages?.[0]?.length + 1 : undefined;
+    },
+
     staleTime: ms("5s"),
     keepPreviousData: true,
   });

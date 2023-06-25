@@ -20,12 +20,17 @@ class APIClient<T> {
     this.endpoint = endpoint;
   }
 
-  getAll = (queryString: string) => {
+  getAll = (queryString: any) => {
     return axiosInstance
       .get<FetchResponse<T>>(this.endpoint + queryString)
       .then((res) => res);
   };
-
+  getAllTags = (params: any) => {
+    console.log(params.params);
+    return axiosInstance
+      .get<FetchResponse<T>>(this.endpoint + `?_page=${params.params.page}`)
+      .then((res) => res);
+  };
   get = (id: number | string) => {
     return axiosInstance
       .get<T>(this.endpoint + "/" + id)
